@@ -1,0 +1,83 @@
+{
+    "title": "Create a text input question",
+    "description": "Create the Json Schema for a text input question to be used in a form",
+    "autoValidated": true,
+    "fields": [
+        {
+            // label field
+            "key": null,
+            "type": "Input",
+            "label": "Field Label",
+            "placeholder": "What do users enter in this field",
+            "value": "",
+            "required": true,
+            "name": "label"
+        },
+        {
+            // placeholder field
+            "key": null,
+            "type": "Input",
+            "label": "Field Placeholder",
+            "placeholder": "Placeholder value for this field",
+            "value": "",
+            "required": false,
+            "name": "placeholder",
+        },
+        {
+            // type field
+            "key": null,
+            "type": "Select",
+            "label": "Input Type",
+            "value": "Input",
+            "items": [
+                {
+                    "label": "Text",
+                    "value": "Input",
+                },
+                {
+                    "label": "Email",
+                    "value": "Email",
+                },
+                {
+                    "label": "Password",
+                    "value": "Password",
+                },
+                {
+                    "label": "Date",
+                    "value": "Date",
+                }
+            ],
+            "required": true,
+            "name": "type",
+        },
+        {
+            // value field
+            "key": null,
+            "type": "Input",
+            "label": "Field Default Value",
+            "placeholder": "Enter a default value for this field",
+            "value": "",
+            "required": false,
+            "name": "value",
+        },
+        {
+            // Attribute fields
+            "key": null,
+            "type": "Checkbox",
+            "label": "Attributes",
+            "name": "attributes",
+            "items": [
+                {
+                    "label": "Required",
+                    "value": true,
+                    "name": "required",
+                },
+                {
+                    "label": "Read-only",
+                    "value": false,
+                    "name": "readOnly",
+                },
+            ],
+        },
+    ]
+}

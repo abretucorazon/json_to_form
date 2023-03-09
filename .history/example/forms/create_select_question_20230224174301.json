@@ -1,0 +1,81 @@
+{
+    "title": "Create a selection input field",
+    "description": "Create the Json Schema for a selection input field of a form",
+    "autoValidated": true,
+    "fields": [
+        {
+            "key": null,
+            "type": "Select",
+            "label": "Field Type",
+            "placeholder": "Select",
+            "value": "Select",
+            "items": [
+                {
+                    "label": "Select",
+                    "value": "Select"
+                },
+                {
+                    "label": "Checkbox",
+                    "value": "Checkbox"
+                },
+                {
+                    "label": "RadioButton",
+                    "value": "RadioButton"
+                }
+            ],
+            "required": true
+        },
+        {
+            "key": null,
+            "type": "Input",
+            "label": "Field Label",
+            "placeholder": "What do users select from this field eg. Meal Time",
+            "value": "",
+            "required": true,
+        },
+        {
+            "key": null,
+            "type": "Input",
+            "label": "Separator string",
+            "placeholder": "Enter a string to separate item names in the list of item name in the field below",
+            "value": "|",
+            "required": true
+        },
+        {
+            "key": null,
+            "type": "Input",
+            "label": "List of Selection Item Names",
+            "placeholder": "Enter Item Names separated by the separator string from the field above eg. Breakfast | Lunch | Dinner"
+        },
+        {
+            "key": null,
+            "type": "Input",
+            "label": "List of Selection Item Values",
+            "placeholder": "Enter the value for each Item Name from the field above, separated by the separator string eg. 7am | 12pm | 5pm"
+        },
+        {
+            "key": null,
+            "type": "Input",
+            "label": "Default Selection Value",
+            "placeholder": "Enter an item value from the "List of Selection Item Values" above",
+            "required": true
+        },
+        {
+            "key": null,
+            "type": "Checkbox",
+            "label": "Attributes",
+            "name": "attributes",
+            "items": [
+                {
+                    "label": "Required",
+                    "value": true,
+                    "name": "required"
+                },
+                {
+                    "label": "Read-only",
+                    "value": false,
+                    "name": "readOnly"
+                }
+            ]
+        }
+    }

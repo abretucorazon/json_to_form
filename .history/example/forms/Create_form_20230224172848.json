@@ -1,0 +1,27 @@
+    {
+      'title': 'Create a new form',
+      'description': 'Gather Data for a new form',
+        //'autoValidated': true,
+      'fields': [
+            {
+                // title field
+          'key': getRandomKey(),
+          'type': 'Input',
+          'label': 'Title',
+          'placeholder': "Enter a title for the new form",
+          'value': '',
+          'required': true,
+          'name': 'title',
+            },
+            {
+                // description field
+          'key': getRandomKey(),
+          'type': 'Input',
+          'label': 'Description',
+          'placeholder': "Enter a description about this form",
+          'value': '',
+          'required': true,
+          'name': 'description',
+            },
+        ],
+    }

@@ -1,0 +1,24 @@
+    {
+        "title": "Create a new form",
+        "description": "Gather Data for a new form",
+        "fields": [
+            {
+                "key": null,
+                "type": "Input",
+                "label": "Title",
+                "placeholder": "Enter a title for the new form",
+                "value": "",
+                "required": true,
+                "name": "title"
+            },
+            {
+                "key": null,
+                "type": "Input",
+                "label": "Description",
+                "placeholder": "Enter a description about this form",
+                "value": "",
+                "required": true,
+                "name": "description"
+            }
+        ]
+    }
