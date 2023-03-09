@@ -3,10 +3,10 @@ import '../functions.dart';
 
 class SimpleSelect extends StatefulWidget {
   SimpleSelect({
-    Key key,
-    @required this.item,
-    @required this.onChange,
-    @required this.position,
+    Key? key,
+    required this.item,
+    required this.onChange,
+    required this.position,
     this.errorMessages = const {},
     this.validations = const {},
     this.decorations = const {},
@@ -25,9 +25,9 @@ class SimpleSelect extends StatefulWidget {
 }
 
 class _SimpleSelect extends State<SimpleSelect> {
-  dynamic item;
+  late dynamic item;
 
-  String isRequired(item, value) {
+  String? isRequired(item, value) {
     if (value.isEmpty) {
       return widget.errorMessages[item['key']] ?? 'Please enter some text';
     }
@@ -56,7 +56,7 @@ class _SimpleSelect extends State<SimpleSelect> {
           DropdownButton<String>(
             hint: Text("Select a user"),
             value: item['value'],
-            onChanged: (String newValue) {
+            onChanged: (String? newValue) {
               setState(() {
                 item['value'] = newValue;
                 widget.onChange(widget.position, newValue);

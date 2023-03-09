@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:json_to_form/json_schema.dart';
 import 'app_model.dart';
+import 'ui_utils.dart';
 
 const _loginFormId = "login_form";
 
@@ -15,11 +16,6 @@ class _Login extends State<Login> {
 
   Json? form;
 
-  @override
-  void initState() async {
-    super.initState();
-    form = await appModel.loadForm(_loginFormId);
-  }
   /*
   String form = json.encode({
     'fields': [
@@ -53,6 +49,16 @@ class _Login extends State<Login> {
 
   @override
   Widget build(BuildContext context) {
+    // Load login form from database before rendering
+    if (form == null) {
+      appModel.loadForm(_loginFormId).then((value) {
+        setState(() {
+          form = value;
+        });
+      });
+      return LoadingScreen(context, "Loading login form...");
+    }
+
     return new Scaffold(
       appBar: new AppBar(
         title: new Text("Login"),
@@ -66,12 +72,13 @@ class _Login extends State<Login> {
             ),
             new JsonSchema(
               decorations: decorations,
-              form: null,
+              form: '',
               formMap: form,
               onChanged: (dynamic response) {
                 this.response = response;
               },
               actionSave: (data) {
+                // TODO Implement authentication
                 print(data);
               },
               autovalidateMode: AutovalidateMode.onUserInteraction,

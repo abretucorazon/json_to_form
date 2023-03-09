@@ -3,10 +3,10 @@ import '../functions.dart';
 
 class SimpleDate extends StatefulWidget {
   SimpleDate({
-    Key key,
-    @required this.item,
-    @required this.onChange,
-    @required this.position,
+    Key? key,
+    required this.item,
+    required this.onChange,
+    required this.position,
     this.errorMessages = const {},
     this.validations = const {},
     this.decorations = const {},
@@ -25,7 +25,7 @@ class SimpleDate extends StatefulWidget {
 }
 
 class _SimpleDate extends State<SimpleDate> {
-  dynamic item;
+  late dynamic item;
 
   @override
   void initState() {
@@ -79,7 +79,7 @@ class _SimpleDate extends State<SimpleDate> {
   }
 
   Future selectDate() async {
-    DateTime picked = await showDatePicker(
+    DateTime? picked = await showDatePicker(
         context: context,
         initialDate: DateTime.now().subtract(Duration(days: 360)),
         firstDate: DateTime.now().subtract(Duration(days: 360)),

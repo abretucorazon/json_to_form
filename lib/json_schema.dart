@@ -6,8 +6,8 @@ import 'components/index.dart';
 
 class JsonSchema extends StatefulWidget {
   const JsonSchema({
-    @required this.form,
-    @required this.onChanged,
+    required this.form,
+    required this.onChanged,
     this.padding,
     this.formMap,
     this.autovalidateMode,
@@ -24,12 +24,12 @@ class JsonSchema extends StatefulWidget {
   final Map decorations;
   final Map keyboardTypes;
   final String form;
-  final Map formMap;
-  final double padding;
-  final Widget buttonSave;
-  final Function actionSave;
+  final Map? formMap;
+  final double? padding;
+  final Widget? buttonSave;
+  final Function? actionSave;
   final ValueChanged<dynamic> onChanged;
-  final AutovalidateMode autovalidateMode;
+  final AutovalidateMode? autovalidateMode;
 
   @override
   _CoreFormState createState() => _CoreFormState(formMap ?? json.decode(form));
@@ -38,7 +38,7 @@ class JsonSchema extends StatefulWidget {
 class _CoreFormState extends State<JsonSchema> {
   final dynamic formGeneral;
 
-  int radioValue;
+  int? radioValue;
 
   List<Widget> jsonToForm() {
     List<Widget> listWidget = [];
@@ -140,8 +140,8 @@ class _CoreFormState extends State<JsonSchema> {
         margin: EdgeInsets.only(top: 10.0),
         child: InkWell(
           onTap: () {
-            if (_formKey.currentState.validate()) {
-              widget.actionSave(formGeneral);
+            if (_formKey.currentState!.validate()) {
+              widget.actionSave!(formGeneral);
             }
           },
           child: widget.buttonSave,

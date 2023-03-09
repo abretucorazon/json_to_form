@@ -125,7 +125,7 @@ class _RegisterMap extends State<RegisterMap> {
                           color: Colors.white, fontWeight: FontWeight.bold)),
                 ),
               ),
-              form: null,
+              form: '',
             ),
           ]),
         ),

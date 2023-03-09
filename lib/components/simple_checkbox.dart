@@ -3,10 +3,10 @@ import '../functions.dart';
 
 class SimpleListCheckbox extends StatefulWidget {
   SimpleListCheckbox({
-    Key key,
-    @required this.item,
-    @required this.onChange,
-    @required this.position,
+    Key? key,
+    required this.item,
+    required this.onChange,
+    required this.position,
     this.errorMessages = const {},
     this.validations = const {},
     this.decorations = const {},
@@ -25,10 +25,10 @@ class SimpleListCheckbox extends StatefulWidget {
 }
 
 class _SimpleListCheckbox extends State<SimpleListCheckbox> {
-  dynamic item;
+  late dynamic item;
   List<dynamic> selectItems = [];
 
-  String isRequired(item, value) {
+  String? isRequired(item, value) {
     if (value.isEmpty) {
       return widget.errorMessages[item['key']] ?? 'Please enter some text';
     }
@@ -60,11 +60,11 @@ class _SimpleListCheckbox extends State<SimpleListCheckbox> {
             Expanded(child: Text(item['items'][i]['label'])),
             Checkbox(
               value: item['items'][i]['value'],
-              onChanged: (bool value) {
+              onChanged: (bool? value) {
                 this.setState(
                   () {
                     item['items'][i]['value'] = value;
-                    if (value) {
+                    if (value!) {
                       selectItems.add(i);
                     } else {
                       selectItems.remove(i);

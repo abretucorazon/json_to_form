@@ -10,7 +10,7 @@ class Fun{
     return false;
   }
 
-  static String validateEmail(item, String value) {
+  static String? validateEmail(item, String value) {
     String p = "[a-zA-Z0-9\+\.\_\%\-\+]{1,256}" +
         "\\@" +
         "[a-zA-Z0-9][a-zA-Z0-9\\-]{0,64}" +

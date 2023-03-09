@@ -5,20 +5,20 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 class CoreForm extends StatefulWidget {
-  final String form;
+  final String? form;
   final dynamic formMap;
-  final EdgeInsets padding;
-  final String labelText;
-  final ValueChanged<dynamic> onChanged;
-  final OutlineInputBorder enabledBorder;
-  final OutlineInputBorder errorBorder;
-  final OutlineInputBorder disabledBorder;
-  final OutlineInputBorder focusedErrorBorder;
-  final OutlineInputBorder focusedBorder;
+  final EdgeInsets? padding;
+  final String? labelText;
+  final ValueChanged<dynamic>? onChanged;
+  final OutlineInputBorder? enabledBorder;
+  final OutlineInputBorder? errorBorder;
+  final OutlineInputBorder? disabledBorder;
+  final OutlineInputBorder? focusedErrorBorder;
+  final OutlineInputBorder? focusedBorder;
 
   const CoreForm({
-    @required this.form,
-    @required this.onChanged,
+    required this.form,
+    required this.onChanged,
     this.labelText,
     this.padding,
     this.formMap,
@@ -30,13 +30,13 @@ class CoreForm extends StatefulWidget {
   });
 
   @override
-  _CoreFormState createState() => _CoreFormState(formMap ?? json.decode(form));
+  _CoreFormState createState() => _CoreFormState(formMap ?? json.decode(form!));
 }
 
 class _CoreFormState extends State<CoreForm> {
   final dynamic formItems;
 
-  int radioValue;
+  int? radioValue;
 
   List<Widget> jsonToForm() {
     List<Widget> listWidget = [];
@@ -46,6 +46,13 @@ class _CoreFormState extends State<CoreForm> {
           item['type'] == "Password" ||
           item['type'] == "Email" ||
           item['type'] == "TareaText") {
+        List<TextInputFormatter>? validators;
+        if (item?['validator'] == 'digitsOnly') {
+          validators = [FilteringTextInputFormatter.allow(RegExp('[0-9]'))];
+        } else if (item?['validator'] == 'textOnly') {
+          validators = [FilteringTextInputFormatter.allow(RegExp('[a-zA-Z]'))];
+        }
+
         listWidget.add(Container(
             padding: EdgeInsets.only(top: 5.0, bottom: 5.0),
             child: Text(
@@ -54,16 +61,7 @@ class _CoreFormState extends State<CoreForm> {
             )));
         listWidget.add(TextField(
           controller: null,
-          inputFormatters: item['validator'] != null && item['validator'] != ''
-              ? [
-                  item['validator'] == 'digitsOnly'
-                      ? FilteringTextInputFormatter.allow(RegExp('[0-9]'))
-                      : null,
-                  item['validator'] == 'textOnly'
-                      ? FilteringTextInputFormatter.allow(RegExp('[a-zA-Z]'))
-                      : null,
-                ]
-              : null,
+          inputFormatters: validators,
           decoration: InputDecoration(
             labelText: widget.labelText,
             enabledBorder: widget.enabledBorder ?? null,
@@ -97,10 +95,10 @@ class _CoreFormState extends State<CoreForm> {
             Row(
               children: <Widget>[
                 Expanded(child: Text(item['list'][i]['title'])),
-                Radio<int>(
+                Radio<int?>(
                     value: item['list'][i]['value'],
                     groupValue: radioValue,
-                    onChanged: (int value) {
+                    onChanged: (int? value) {
                       this.setState(() {
                         radioValue = value;
                         item['value'] = value;
@@ -142,7 +140,7 @@ class _CoreFormState extends State<CoreForm> {
                 Expanded(child: Text(item['list'][i]['title'])),
                 Checkbox(
                     value: item['list'][i]['value'],
-                    onChanged: (bool value) {
+                    onChanged: (bool? value) {
                       this.setState(() {
                         item['list'][i]['value'] = value;
                         _handleChanged();
@@ -160,7 +158,7 @@ class _CoreFormState extends State<CoreForm> {
   _CoreFormState(this.formItems);
 
   void _handleChanged() {
-    widget.onChanged(formItems);
+    widget.onChanged!(formItems);
   }
 
   void onChange(int position, dynamic value) {

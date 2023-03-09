@@ -3,10 +3,10 @@ import '../functions.dart';
 
 class SimpleText extends StatefulWidget {
   SimpleText({
-    Key key,
-    @required this.item,
-    @required this.onChange,
-    @required this.position,
+    Key? key,
+    required this.item,
+    required this.onChange,
+    required this.position,
     this.errorMessages = const {},
     this.validations = const {},
     this.decorations = const {},
@@ -27,7 +27,7 @@ class SimpleText extends StatefulWidget {
 class _SimpleText extends State<SimpleText> {
   dynamic item;
 
-  String isRequired(item, value) {
+  String? isRequired(item, value) {
     if (value.isEmpty) {
       return widget.errorMessages[item['key']] ?? 'Please enter some text';
     }
@@ -36,7 +36,6 @@ class _SimpleText extends State<SimpleText> {
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     item = widget.item;
   }
@@ -90,7 +89,7 @@ class _SimpleText extends State<SimpleText> {
                 }
               }
               if (item['type'] == "Email") {
-                return Fun.validateEmail(item, value);
+                return Fun.validateEmail(item, value!);
               }
 
               if (item.containsKey('required')) {

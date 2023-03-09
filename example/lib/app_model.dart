@@ -40,7 +40,7 @@ class AppModel {
         (documentSnapshot.exists) ? documentSnapshot.data() as Json : {};
 
     print(
-        'Document: ${formId} does not exist in collection: ${_formCollectionName}');
+        'Finish loading document: ${formId} in collection: ${_formCollectionName}');
 
     return formMap;
   }

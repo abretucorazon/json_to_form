@@ -53,7 +53,7 @@ class _CreateQuestionScreen extends State<CreateQuestionScreen> {
           // in the middle of the parent.
           child: new Column(children: <Widget>[
             new JsonSchema(
-              form: null,
+              form: '',
               formMap: widget.form,
               onChanged: (dynamic response) {
                 this.response = response;

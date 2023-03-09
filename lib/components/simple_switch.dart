@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 
 class SimpleSwitch extends StatefulWidget {
   SimpleSwitch({
-    Key key,
-    @required this.item,
-    @required this.onChange,
-    @required this.position,
+    Key? key,
+    required this.item,
+    required this.onChange,
+    required this.position,
     this.errorMessages = const {},
     this.validations = const {},
     this.decorations = const {},
@@ -24,9 +24,9 @@ class SimpleSwitch extends StatefulWidget {
 }
 
 class _SimpleSwitch extends State<SimpleSwitch> {
-  dynamic item;
+  late dynamic item;
 
-  String isRequired(item, value) {
+  String? isRequired(item, value) {
     if (value.isEmpty) {
       return widget.errorMessages[item['key']] ?? 'Please enter some text';
     }
@@ -35,7 +35,6 @@ class _SimpleSwitch extends State<SimpleSwitch> {
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     item = widget.item;
     if (item['value'] == null) {
@@ -45,7 +44,6 @@ class _SimpleSwitch extends State<SimpleSwitch> {
 
   @override
   Widget build(BuildContext context) {
-    // TODO: implement build
     return Container(
       margin: EdgeInsets.only(top: 5.0),
       child: Row(children: <Widget>[
