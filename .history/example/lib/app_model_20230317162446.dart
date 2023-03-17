@@ -35,28 +35,30 @@ class AppModel {
   }
 
   Future<Json> loadForm(String formId) async {
-    final documentSnapshot = await _firestore
+    DocumentSnapshot documentSnapshot = await _firestore
         .collection(_formCollectionName)
         .doc(formId)
-        .withConverter<Json>(fromFirestore: (snapshot, _) {
-      // Convert document fields ["created", "last_edited"] from type TimeStamp to DateTime string
-      final form = snapshot.data();
-      form?[_createdFieldName] =
-          (form[_createdFieldName] as Timestamp?)?.toDate().toString();
-      form?[_lastEditedFieldName] =
-          (form[_lastEditedFieldName] as Timestamp?)?.toDate().toString();
-      return form ?? {};
-    }, toFirestore: (form, _) {
-      // Convert Json fields ["created", "last_edited"] from type DateTime strings to TimeStamp
-      form[_createdFieldName] = (form[_createdFieldName] == null)
-          ? Timestamp.now()
-          : Timestamp.fromDate(DateTime.parse(form[_createdFieldName]));
-      form[_lastEditedFieldName] = Timestamp.now();
+        .withConverter<Json>(
+      fromFirestore: (snapshot, _) {
+        final form = snapshot.data();
+        form?[_createdFieldName] =
+            (form[_createdFieldName] as Timestamp).toDate().toString();
+        form?[_lastEditedFieldName] =
+            (form[_lastEditedFieldName] as Timestamp).toDate().toString();
+        return form ?? {};
+      },
+      toFirestore: (form, _) {
+        form[_createdFieldName] = (form[_createdFieldName] == null)
+            ? Timestamp.now()
+            : Timestamp.fromDate(DateTime.parse(form[_createdFieldName]));
 
-      print("TimeStamp Converted to DateTime string: ${form} ");
-
-      return form;
-    }).get();
+        (form?[_createdFieldName] as Timestamp).toDate().toString();
+        form[_lastEditedFieldName] =
+            (form[_lastEditedFieldName] as Timestamp).toDate().toString();
+        return form;
+      },
+    ).get();
+    ;
 
     final Json formMap =
         (documentSnapshot.exists) ? documentSnapshot.data() as Json : {};

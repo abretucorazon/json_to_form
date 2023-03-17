@@ -2,10 +2,6 @@ import "dart:convert";
 
 import "package:flutter/material.dart";
 import "package:json_to_form/json_schema.dart";
-import 'app_model.dart';
-import 'ui_utils.dart';
-
-const _FormId = "all_field_types";
 
 class AllFields extends StatefulWidget {
   AllFields({Key? key}) : super(key: key);
@@ -24,10 +20,7 @@ class AllFields extends StatefulWidget {
 }
 
 class _AllFields extends State<AllFields> {
-  final AppModel appModel = AppModel.get();
-  Json? form;
-
-  /*json.encode({
+  String form = json.encode({
     "title": "Test Form Json Schema",
     "description": "My Description",
     "fields": [
@@ -57,23 +50,31 @@ class _AllFields extends State<AllFields> {
         "label": "TareaText test",
         "placeholder": "hola a todos"
       },
-      {"key": "date", "type": "Date", "label": "Select test"},
-      {
-        "key": "switch1",
-        "type": "Switch",
-        "label": "Switch test",
-        "value": false
-      },
       {
         "key": "radiobutton1",
         "type": "RadioButton",
         "label": "Radio Button tests",
         "value": 2,
         "items": [
-          {"label": "product 1", "value": 1},
-          {"label": "product 2", "value": 2},
-          {"label": "product 3", "value": 3}
+          {
+            "label": "product 1",
+            "value": 1,
+          },
+          {
+            "label": "product 2",
+            "value": 2,
+          },
+          {
+            "label": "product 3",
+            "value": 3,
+          }
         ]
+      },
+      {
+        "key": "switch1",
+        "type": "Switch",
+        "label": "Switch test",
+        "value": false,
       },
       {
         "key": "checkbox1",
@@ -92,14 +93,23 @@ class _AllFields extends State<AllFields> {
         "label": "Select test",
         "value": "product 1",
         "items": [
-          {"label": "product 1", "value": "product 1"},
-          {"label": "product 2", "value": "product 2"},
-          {"label": "product 3", "value": "product 3"}
+          {
+            "label": "product 1",
+            "value": "product 1",
+          },
+          {
+            "label": "product 2",
+            "value": "product 2",
+          },
+          {
+            "label": "product 3",
+            "value": "product 3",
+          }
         ]
-      }
+      },
+      {"key": "date", "type": "Date", "label": "Select test"}
     ]
   });
-  */
   dynamic response;
 
   @override
@@ -110,16 +120,6 @@ class _AllFields extends State<AllFields> {
     // The Flutter framework has been optimized to make rerunning build methods
     // fast, so that you can just rebuild anything that needs updating rather
     // than having to individually change instances of widgets.
-    // Load login form from database before rendering
-    if (form == null) {
-      appModel.loadForm(_FormId).then((value) {
-        setState(() {
-          form = value;
-        });
-      });
-      return LoadingScreen(context, "Loading login form...");
-    }
-
     return new Scaffold(
       appBar: new AppBar(
         // Here we take the value from the MyHomePage object that was created by
@@ -132,8 +132,7 @@ class _AllFields extends State<AllFields> {
           // in the middle of the parent.
           child: new Column(children: <Widget>[
             new JsonSchema(
-              form: '',
-              formMap: form,
+              form: form,
               onChanged: (dynamic response) {
                 this.response = response;
                 print(jsonEncode(response));

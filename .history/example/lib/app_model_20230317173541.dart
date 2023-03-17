@@ -35,7 +35,7 @@ class AppModel {
   }
 
   Future<Json> loadForm(String formId) async {
-    final documentSnapshot = await _firestore
+    final documentSnapshot = _firestore
         .collection(_formCollectionName)
         .doc(formId)
         .withConverter<Json>(fromFirestore: (snapshot, _) {

@@ -3,7 +3,6 @@ import "dart:convert";
 import "package:flutter/material.dart";
 import "package:json_to_form/json_schema.dart";
 import 'app_model.dart';
-import 'ui_utils.dart';
 
 const _FormId = "all_field_types";
 
@@ -24,8 +23,7 @@ class AllFields extends StatefulWidget {
 }
 
 class _AllFields extends State<AllFields> {
-  final AppModel appModel = AppModel.get();
-  Json? form;
+  String? form;
 
   /*json.encode({
     "title": "Test Form Json Schema",
@@ -112,7 +110,7 @@ class _AllFields extends State<AllFields> {
     // than having to individually change instances of widgets.
     // Load login form from database before rendering
     if (form == null) {
-      appModel.loadForm(_FormId).then((value) {
+      appModel.loadForm(_loginFormId).then((value) {
         setState(() {
           form = value;
         });
@@ -132,8 +130,7 @@ class _AllFields extends State<AllFields> {
           // in the middle of the parent.
           child: new Column(children: <Widget>[
             new JsonSchema(
-              form: '',
-              formMap: form,
+              form: form,
               onChanged: (dynamic response) {
                 this.response = response;
                 print(jsonEncode(response));

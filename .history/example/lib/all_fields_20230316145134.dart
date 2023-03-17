@@ -132,8 +132,7 @@ class _AllFields extends State<AllFields> {
           // in the middle of the parent.
           child: new Column(children: <Widget>[
             new JsonSchema(
-              form: '',
-              formMap: form,
+              form: form,
               onChanged: (dynamic response) {
                 this.response = response;
                 print(jsonEncode(response));
